@@ -9,9 +9,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.bukkit.ChatColor.*;
 
 public class Mapcha extends JavaPlugin {
@@ -41,22 +38,22 @@ public class Mapcha extends JavaPlugin {
         public static String permission = "mapcha.bypass";
 
         @ConfigValue("tries")
-        public static int captchaTries = 3;
+        public static int captchaTries = 5;
 
         @ConfigValue("time_limit")
-        public static int captchaTimeLimit = 10;
+        public static int captchaTimeLimit = 60;
 
         @ConfigValue("success_server")
-        public static String successServer = "";
+        public static String successServer = "main";
 
         @ConfigValue("messages.success")
-        public static String captchaSuccessMessage = "Captcha " + GREEN + "solved!";
+        public static String captchaSuccessMessage = GREEN + "Success! Joining main server...";
 
         @ConfigValue("messages.retry")
-        public static String captchaRetryMessage = "Captcha " + YELLOW + "failed, " + RESET + "please try again. ({CURRENT}/{MAX})";
+        public static String captchaRetryMessage = RED + "Captcha failed, please try again! ({CURRENT}/{MAX})";
 
         @ConfigValue("messages.fail")
-        public static String captchaFailMessage = "Captcha " + RED + "failed!";
+        public static String captchaFailMessage = RED + "Captcha failed!";
     }
 
 }

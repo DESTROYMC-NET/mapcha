@@ -89,7 +89,6 @@ public class PlayerEvent implements Listener {
                 player.getPlayer().sendMessage(captchaSuccessMessage);
                 player.resetInventory();
                 mapcha.getPlayerManager().removePlayer(player);
-                event.getPlayer().sendMessage(ChatColor.GREEN + "Success! Joining main server...");
                 Bukkit.getScheduler().runTask(mapcha, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "luckperms user " + player.getPlayer().getUniqueId() + " permission settemp mapcha.bypass true 24hr"));
                 Bukkit.getScheduler().scheduleSyncRepeatingTask(mapcha, () -> sendPlayerToServer(player.getPlayer()), 10, 120);
             } else {
