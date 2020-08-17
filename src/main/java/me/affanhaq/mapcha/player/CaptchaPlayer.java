@@ -39,7 +39,7 @@ public class CaptchaPlayer {
         // starting a timer to kick the player if the captcha has not been finished
         player.getServer().getScheduler().scheduleSyncDelayedTask(mapcha, () -> {
             if (mapcha.getPlayerManager().getPlayer(player) != null) {
-                player.getPlayer().kickPlayer(prefix + " " + captchaFailMessage);
+                player.getPlayer().kickPlayer(captchaFailMessage);
             }
         }, captchaTimeLimit * 20);
     }

@@ -85,41 +85,21 @@ public class PlayerEvent implements Listener {
 
             // captcha success
             if (event.getMessage().equals(player.getCaptcha())) {
-                player.getPlayer().sendMessage(prefix + " " + captchaSuccessMessage);
+                player.getPlayer().sendMessage(captchaSuccessMessage);
                 player.resetInventory();
                 mapcha.getPlayerManager().removePlayer(player);
                 sendPlayerToServer(player.getPlayer());
             } else {
                 if (player.getTries() >= (captchaTries - 1)) { // kicking the player because he's out of tries
-                    Bukkit.getScheduler().runTask(mapcha, () -> player.getPlayer().kickPlayer(prefix + " " + captchaFailMessage));
+                    Bukkit.getScheduler().runTask(mapcha, () -> player.getPlayer().kickPlayer(captchaFailMessage));
                 } else { // telling the player to try again
                     player.setTries(player.getTries() + 1);
-                    player.getPlayer().sendMessage(prefix + " " + captchaRetryMessage.replace("{CURRENT}", String.valueOf(player.getTries())).replace("{MAX}", String.valueOf(captchaTries)));
+                    player.getPlayer().sendMessage(captchaRetryMessage.replace("{CURRENT}", String.valueOf(player.getTries())).replace("{MAX}", String.valueOf(captchaTries)));
                 }
             }
 
             event.setCancelled(true);
         }
-    }
-
-    @EventHandler
-    public void onCommand(PlayerCommandPreprocessEvent event) {
-        event.setCancelled(mapcha.getPlayerManager().getPlayer(event.getPlayer()) != null && !validCommand(event.getMessage()));
-    }
-
-    /**
-     * Checks if the message contains a command.
-     *
-     * @param message the message to check commands for
-     * @return whether the message contains a command or not
-     */
-    private boolean validCommand(String message) {
-        for (String command : commands) {
-            if (message.contains(command)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

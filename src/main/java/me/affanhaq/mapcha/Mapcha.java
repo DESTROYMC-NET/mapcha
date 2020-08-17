@@ -40,12 +40,6 @@ public class Mapcha extends JavaPlugin {
 
         public static String permission = "mapcha.bypass";
 
-        @ConfigValue("prefix")
-        public static String prefix = "[" + GREEN + "Mapcha" + RESET + "]";
-
-        @ConfigValue("commands")
-        public static List<String> commands = Arrays.asList("/register", "/login");
-
         @ConfigValue("tries")
         public static int captchaTries = 3;
 
