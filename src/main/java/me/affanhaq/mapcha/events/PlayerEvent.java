@@ -5,6 +5,7 @@ import com.google.common.io.ByteStreams;
 import me.affanhaq.mapcha.Mapcha;
 import me.affanhaq.mapcha.player.CaptchaPlayer;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -88,7 +89,9 @@ public class PlayerEvent implements Listener {
                 player.getPlayer().sendMessage(captchaSuccessMessage);
                 player.resetInventory();
                 mapcha.getPlayerManager().removePlayer(player);
-                sendPlayerToServer(player.getPlayer());
+                event.getPlayer().sendMessage(ChatColor.GREEN + "Success! Joining main server...");
+                Bukkit.getScheduler().runTask(mapcha, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "luckperms user " + player.getPlayer().getUniqueId() + " permission settemp mapcha.bypass true 24hr"));
+                Bukkit.getScheduler().scheduleSyncRepeatingTask(mapcha, () -> sendPlayerToServer(player.getPlayer()), 10, 120);
             } else {
                 if (player.getTries() >= (captchaTries - 1)) { // kicking the player because he's out of tries
                     Bukkit.getScheduler().runTask(mapcha, () -> player.getPlayer().kickPlayer(captchaFailMessage));
