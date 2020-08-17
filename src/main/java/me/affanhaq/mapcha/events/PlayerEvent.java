@@ -36,8 +36,8 @@ public class PlayerEvent implements Listener {
         Player player = event.getPlayer();
 
         // player has permission to bypass the captcha
-        if (player.hasPermission(permission)) {
-            Bukkit.getScheduler().scheduleSyncDelayedTask(mapcha, () -> sendPlayerToServer(player), 15);
+        if (player.hasPermission(permission) || player.isOp()) {
+            Bukkit.getScheduler().scheduleSyncRepeatingTask(mapcha, () -> sendPlayerToServer(player), 10, 120);
             return;
         }
 
