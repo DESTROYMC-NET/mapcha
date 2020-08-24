@@ -55,7 +55,7 @@ public class CaptchaPlayer {
         BufferedImage image = new BufferedImage(130, 130, BufferedImage.TYPE_INT_RGB);
         Graphics g = image.getGraphics();
 
-        g.setFont(new Font("Arial", Font.BOLD, 30));
+        g.setFont(new Font("Arial", Font.BOLD, 25));
         g.drawString(title, (int) ((image.getWidth() - g.getFontMetrics().getStringBounds(title, g).getWidth()) / 2), 30);
 
         g.setFont(new Font("Arial", Font.BOLD, 10));
