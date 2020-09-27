@@ -6,7 +6,7 @@
 
     <groupId>me.ihaq</groupId>
     <artifactId>mapcha</artifactId>
-    <version>1.9-hyper</version>
+    <version>hyper-${git.commit.id.describe-short}</version>
 
     <build>
         <plugins>
@@ -34,6 +34,23 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>4.0.2</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+                </configuration>
             </plugin>
         </plugins>
     </build>
