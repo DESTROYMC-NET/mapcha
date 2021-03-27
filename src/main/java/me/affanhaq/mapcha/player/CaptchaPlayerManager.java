@@ -9,7 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CaptchaPlayerManager {
 
-    private final List<CaptchaPlayer> playerList = new CopyOnWriteArrayList<>();
+    private final List < CaptchaPlayer > playerList = new CopyOnWriteArrayList < > ();
 
     public void addPlayer(CaptchaPlayer player) {
         playerList.add(player);

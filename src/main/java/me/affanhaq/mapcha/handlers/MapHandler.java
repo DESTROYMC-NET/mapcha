@@ -26,7 +26,7 @@ public class MapHandler implements Listener {
     public void onMapInitilize(MapInitializeEvent event) {
 
         MapView map = event.getMap();
-        List<MapRenderer> old = map.getRenderers();
+        List < MapRenderer > old = map.getRenderers();
 
         map.setScale(MapView.Scale.NORMAL);
         map.getRenderers().forEach(map::removeRenderer);
