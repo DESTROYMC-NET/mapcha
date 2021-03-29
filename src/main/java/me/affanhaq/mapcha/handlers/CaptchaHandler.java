@@ -32,7 +32,7 @@ public class CaptchaHandler implements Listener {
 
         mapcha.getPlayerManager().removePlayer(player);
         Bukkit.getScheduler().runTask(mapcha, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "luckperms user " + player.getPlayer().getUniqueId() + " permission settemp mapcha.bypass true 24hr"));
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(mapcha, () -> Mapcha.sendPlayerToServer(mapcha, player.getPlayer()), 10, 120);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(mapcha, () -> Mapcha.sendPlayerToServer(mapcha, player.getPlayer()), 20, 120);
     }
 
     @EventHandler

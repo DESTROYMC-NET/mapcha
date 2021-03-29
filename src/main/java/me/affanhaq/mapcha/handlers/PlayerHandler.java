@@ -38,7 +38,7 @@ public class PlayerHandler implements Listener {
         // checking if player has permission to bypass the captcha or player has already completed the captcha before
         // by default OPs have the '*' permission so this method will return true
         if (player.hasPermission(permission) || (useCompletedCache && mapcha.getCompletedCache().contains(player.getUniqueId()))) {
-            Bukkit.getScheduler().scheduleSyncRepeatingTask(mapcha, () -> Mapcha.sendPlayerToServer(mapcha, player), 10, 120);
+            Bukkit.getScheduler().scheduleSyncRepeatingTask(mapcha, () -> Mapcha.sendPlayerToServer(mapcha, player), 20, 120);
             return;
         }
 
