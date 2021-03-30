@@ -1,9 +1,9 @@
 package me.affanhaq.mapcha.events;
 
-import com.sun.istack.internal.NotNull;
 import me.affanhaq.mapcha.player.CaptchaPlayer;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.jetbrains.annotations.NotNull;
 
 public class CaptchaFailedEvent extends Event {
     private static final HandlerList HANDLERS = new HandlerList();
