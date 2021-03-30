@@ -2,12 +2,12 @@ package me.affanhaq.mapcha;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import me.affanhaq.keeper.Keeper;
+import me.affanhaq.keeper.data.ConfigValue;
 import me.affanhaq.mapcha.handlers.CaptchaHandler;
 import me.affanhaq.mapcha.handlers.MapHandler;
 import me.affanhaq.mapcha.handlers.PlayerHandler;
 import me.affanhaq.mapcha.player.CaptchaPlayerManager;
-import me.ihaq.keeper.Keeper;
-import me.ihaq.keeper.data.ConfigValue;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
