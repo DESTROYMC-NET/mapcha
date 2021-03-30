@@ -22,4 +22,8 @@ public class CaptchaFailedEvent extends Event {
     HandlerList getHandlers() {
         return HANDLERS;
     }
+
+    public static HandlerList getHandlerList() {
+        return HANDLERS;
+    }
 }
