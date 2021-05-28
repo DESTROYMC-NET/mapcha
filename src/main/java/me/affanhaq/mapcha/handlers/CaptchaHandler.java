@@ -31,8 +31,16 @@ public class CaptchaHandler implements Listener {
         }
 
         mapcha.getPlayerManager().removePlayer(player);
-        Bukkit.getScheduler().runTask(mapcha, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "luckperms user " + player.getPlayer().getUniqueId() + " permission settemp mapcha.bypass true 24hr"));
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(mapcha, () -> Mapcha.sendPlayerToServer(mapcha, player.getPlayer()), 20, 120);
+        Bukkit.getScheduler()
+                .runTask(
+                        mapcha,
+                        () -> Bukkit.dispatchCommand(
+                                Bukkit.getConsoleSender(),
+                                "luckperms user " + player.getPlayer().getUniqueId()
+                                        + " permission settemp mapcha.bypass true 24hr"));
+        Bukkit.getScheduler()
+                .scheduleSyncRepeatingTask(
+                        mapcha, () -> Mapcha.sendPlayerToServer(mapcha, player.getPlayer()), 20, 120);
     }
 
     @EventHandler
@@ -44,10 +52,11 @@ public class CaptchaHandler implements Listener {
             Bukkit.getScheduler().runTask(mapcha, () -> player.getPlayer().kickPlayer(prefix + " " + failMessage));
         } else { // telling the player to try again
             player.setTries(player.getTries() + 1);
-            player.getPlayer().sendMessage(
-                    prefix + " " + retryMessage.replace("{CURRENT}", String.valueOf(player.getTries())).replace("{MAX}", String.valueOf(tries))
-            );
+            player.getPlayer()
+                    .sendMessage(prefix + " "
+                            + retryMessage
+                                    .replace("{CURRENT}", String.valueOf(player.getTries()))
+                                    .replace("{MAX}", String.valueOf(tries)));
         }
     }
-
 }

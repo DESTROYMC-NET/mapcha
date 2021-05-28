@@ -1,7 +1,7 @@
 package me.affanhaq.mapcha.handlers;
 
-import me.affanhaq.mapcha.player.CaptchaPlayer;
 import me.affanhaq.mapcha.Mapcha;
+import me.affanhaq.mapcha.player.CaptchaPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -26,7 +26,7 @@ public class MapHandler implements Listener {
     public void onMapInitilize(MapInitializeEvent event) {
 
         MapView map = event.getMap();
-        List < MapRenderer > old = map.getRenderers();
+        List<MapRenderer> old = map.getRenderers();
 
         map.setScale(MapView.Scale.NORMAL);
         map.getRenderers().forEach(map::removeRenderer);

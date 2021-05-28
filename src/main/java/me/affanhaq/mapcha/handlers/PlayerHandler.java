@@ -19,7 +19,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.Collections;
 import java.util.Random;
 
-import static me.affanhaq.mapcha.Mapcha.Config.*;
+import static me.affanhaq.mapcha.Mapcha.Config.permission;
+import static me.affanhaq.mapcha.Mapcha.Config.useCompletedCache;
 
 public class PlayerHandler implements Listener {
 
@@ -36,19 +37,23 @@ public class PlayerHandler implements Listener {
 
         // checking if player has permission to bypass the captcha or player has already completed the captcha before
         // by default OPs have the '*' permission so this method will return true
-        if (player.hasPermission(permission) || (useCompletedCache && mapcha.getCompletedCache().contains(player.getUniqueId()))) {
-            Bukkit.getScheduler().scheduleSyncRepeatingTask(mapcha, () -> Mapcha.sendPlayerToServer(mapcha, player), 20, 120);
+        if (player.hasPermission(permission)
+                || (useCompletedCache && mapcha.getCompletedCache().contains(player.getUniqueId()))) {
+            Bukkit.getScheduler()
+                    .scheduleSyncRepeatingTask(mapcha, () -> Mapcha.sendPlayerToServer(mapcha, player), 20, 120);
             return;
         }
 
         // creating a captcha player
-        CaptchaPlayer captchaPlayer = new CaptchaPlayer(player, genCaptcha(), mapcha)
-                .cleanPlayer();
+        CaptchaPlayer captchaPlayer = new CaptchaPlayer(player, genCaptcha(), mapcha).cleanPlayer();
 
         // making a map for the player
         String version = Bukkit.getVersion();
         ItemStack itemStack;
-        if (version.contains("1.13") || version.contains("1.14") || version.contains("1.15") || version.contains("1.16")) {
+        if (version.contains("1.13")
+                || version.contains("1.14")
+                || version.contains("1.15")
+                || version.contains("1.16")) {
             itemStack = new ItemStack(Material.valueOf("LEGACY_EMPTY_MAP"));
         } else {
             itemStack = new ItemStack(Material.valueOf("EMPTY_MAP"));
@@ -89,9 +94,11 @@ public class PlayerHandler implements Listener {
 
         // captcha success
         if (event.getMessage().equals(player.getCaptcha())) {
-            Bukkit.getScheduler().runTask(mapcha, () -> Bukkit.getPluginManager().callEvent(new CaptchaSuccessEvent(player)));
+            Bukkit.getScheduler()
+                    .runTask(mapcha, () -> Bukkit.getPluginManager().callEvent(new CaptchaSuccessEvent(player)));
         } else {
-            Bukkit.getScheduler().runTask(mapcha, () -> Bukkit.getPluginManager().callEvent(new CaptchaFailedEvent(player)));
+            Bukkit.getScheduler()
+                    .runTask(mapcha, () -> Bukkit.getPluginManager().callEvent(new CaptchaFailedEvent(player)));
         }
 
         event.setCancelled(true);
@@ -108,5 +115,4 @@ public class PlayerHandler implements Listener {
         }
         return random.toString();
     }
-
 }

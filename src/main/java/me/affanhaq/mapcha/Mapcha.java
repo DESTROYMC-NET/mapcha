@@ -13,7 +13,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 import static me.affanhaq.mapcha.Mapcha.Config.sendToSuccessServer;
 import static me.affanhaq.mapcha.Mapcha.Config.successServerName;
@@ -24,11 +26,23 @@ public class Mapcha extends JavaPlugin {
     private final CaptchaPlayerManager playerManager = new CaptchaPlayerManager();
     private final Set<UUID> completedCache = new HashSet<>();
 
+    /**
+     * Sends a player to a connected server after the captcha is completed.
+     *
+     * @param player the player to send
+     */
+    public static void sendPlayerToServer(JavaPlugin javaPlugin, Player player) {
+        if (sendToSuccessServer && successServerName != null && !successServerName.isEmpty()) {
+            ByteArrayDataOutput out = ByteStreams.newDataOutput();
+            out.writeUTF("Connect");
+            out.writeUTF(successServerName);
+            player.sendPluginMessage(javaPlugin, "BungeeCord", out.toByteArray());
+        }
+    }
+
     @Override
     public void onEnable() {
-        new Keeper(this)
-                .register(new Config())
-                .load();
+        new Keeper(this).register(new Config()).load();
 
         // registering events
         PluginManager pluginManager = Bukkit.getPluginManager();
@@ -45,20 +59,6 @@ public class Mapcha extends JavaPlugin {
 
     public Set<UUID> getCompletedCache() {
         return completedCache;
-    }
-
-    /**
-     * Sends a player to a connected server after the captcha is completed.
-     *
-     * @param player the player to send
-     */
-    public static void sendPlayerToServer(JavaPlugin javaPlugin, Player player) {
-        if (sendToSuccessServer && successServerName != null && !successServerName.isEmpty()) {
-            ByteArrayDataOutput out = ByteStreams.newDataOutput();
-            out.writeUTF("Connect");
-            out.writeUTF(successServerName);
-            player.sendPluginMessage(javaPlugin, "BungeeCord", out.toByteArray());
-        }
     }
 
     public static class Config {
